@@ -10,7 +10,8 @@ const category_schema = mongoose.Schema({
     },
     id_cat: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     category_name: {
         type: String,
@@ -20,7 +21,7 @@ const category_schema = mongoose.Schema({
         type: String,
         required: true
     },
-    jobs: [],
+    jobs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Job" }],
 });
 
 category_schema.plugin(uniqueValidator, { msg: "already taken" });

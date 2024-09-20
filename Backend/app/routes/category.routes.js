@@ -1,14 +1,13 @@
 module.exports = (app) => {
-    const { createCaregory, findOneCaregory, findAllCaregory, updateCaregory, deleteCategory } = require('../controllers/category.controller.js');
+    const { createCategory, findAllCategories, findOneCategory, updateCategory, deleteOneCategory } = require('../controllers/category.controller.js');
 
-    app.post('/categories', createCaregory);
+    app.post('/categories', createCategory);
 
-    app.get('/categories/:slug', findOneCaregory);
+    app.get('/categories', findAllCategories);
 
-    app.get('/categories', findAllCaregory);
+    app.get('/categories/:slug', findOneCategory);
 
-    app.put('/categories/:slug', updateCaregory);
+    app.put('/categories/:slug', updateCategory);
 
-    app.delete('/categories/:slug', deleteCategory);
-
+    app.delete('/categories/:slug', deleteOneCategory);
 }

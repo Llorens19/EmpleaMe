@@ -1,7 +1,7 @@
 const Category = require("../models/category.model.js");
 const asyncHandler = require('express-async-handler');
 
-const createCaregory = asyncHandler(async (req, res) => {
+const createCategory = asyncHandler(async (req, res) => {
 
     const attributes = req.body;
 
@@ -18,30 +18,12 @@ const createCaregory = asyncHandler(async (req, res) => {
     res.json(new_category); //devolvemos el objeto guardado
 });
 
-
-const findOneCaregory = asyncHandler(async (req, res) => {
-
-    const categories = await Category.findOne(req.params)
-    console.log(req.params.slug); //obtenemos el slug de la URL
-
-
-    if (!categories) {
-        return res.status(401).json({
-            message: "Category not found"
-        })
-    }
-    return res.status(200).json({
-        categories: await categories.toCategoryResponse() //devolvemos el objeto en formato JSON
-    })
-});
-
-
-const findAllCaregory = asyncHandler(async (req, res) => {
+const findAllCategories = asyncHandler(async (req, res) => {
     const categories = await Category.find();
 
     if (!categories) {
         return res.status(401).json({
-            message: "Category not found"
+            message: "No se encontraron categorías"
         })
     }
 
@@ -52,49 +34,64 @@ const findAllCaregory = asyncHandler(async (req, res) => {
     });
 });
 
-const updateCaregory = asyncHandler(async (req, res) => {
+const findOneCategory = asyncHandler(async (req, res) => {
+
+    const categories = await Category.findOne(req.params)
+    console.log(req.params.slug); //obtenemos el slug de la URL
+
+
+    if (!categories) {
+        return res.status(401).json({
+            message: "Categoría no encontrada"
+        })
+    }
+    return res.status(200).json({
+        categories: await categories.toCategoryResponse() //devolvemos el objeto en formato JSON
+    })
+});
+
+const updateCategory = asyncHandler(async (req, res) => {
     const category = await Category.findOne(req.params); //buscamos el objeto en la base de datos
     console.log(req.params.slug);
 
     if (!category) {
         return res.status(401).json({
-            message: "Category not found"
+            message: "Categoría no encontrada"
         })
     }
 
-    const { category_name, image, jobs } = req.body;
+    const { id_cat, category_name, image, jobs } = req.body;
 
+    category.id_cat = id_cat || category.id_cat;
     category.category_name = category_name || category.category_name;
-    category.image = image || image;
-    category.jobs = jobs || jobs;
+    category.image = image || category.image;
+    category.jobs = jobs || category.jobs;
+
     const updated_category = await category.save();
     res.json(updated_category);
 });
 
-
-const deleteCategory = asyncHandler(async (req, res) => {
+const deleteOneCategory = asyncHandler(async (req, res) => {
     const category = await Category.findOne(req.params); //buscamos el objeto en la base de datos
     console.log(req.params.slug);
     console.log(category);
 
     if (!category) {
         return res.status(401).json({
-            message: "Category not found"
+            message: "Categoría no encontrada"
         })
     }
 
     await Category.findOneAndDelete(req.params); //borramos el objeto de la base de datos
     res.json({
-        message: "Category deleted"
+        message: "Categoría eliminada"
     });
 });
 
-
-
 module.exports = {
-    createCaregory,
-    findOneCaregory,
-    findAllCaregory,
-    updateCaregory,
-    deleteCategory
+    createCategory,
+    findAllCategories,
+    findOneCategory,
+    updateCategory,
+    deleteOneCategory
 }

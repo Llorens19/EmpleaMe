@@ -1,16 +1,15 @@
 module.exports = (app) => {
+    const { createJob, findAllJobs, findOneJob, getJobsByCategory, updateJob, deleteOneJob } = require('../controllers/job.controller.js');
 
-    const { createJob, findAllJobs, findOneJob, updateJob, deleteOneJob } = require('../controllers/job.controller.js');
+    app.post('/jobs', createJob);
 
-    app.post('/job', createJob);
+    app.get('/jobs', findAllJobs);
 
-    app.get('/job', findAllJobs);
+    app.get('/jobs/:slug', findOneJob);
 
-    app.get('/job/:slug', findOneJob);
+    app.get('/jobsByCategory/:slug', getJobsByCategory);
 
-    app.put('/job/:slug', updateJob);
+    app.put('/jobs/:slug', updateJob);
 
-    app.delete('/job/:slug', deleteOneJob);
-
-
+    app.delete('/jobs/:slug', deleteOneJob);
 }

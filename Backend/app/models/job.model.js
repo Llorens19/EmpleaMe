@@ -61,5 +61,4 @@ JobSchema.methods.toJobResponse = async function (user) {
     }
 }
 
-
-module.exports = mongoose.model('Product', JobSchema);
+module.exports = mongoose.model('Job', JobSchema);

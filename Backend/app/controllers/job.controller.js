@@ -1,11 +1,9 @@
 const Job = require('../models/job.model.js');
 const Category = require('../models/category.model.js');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const asyncHandler = require('express-async-handler');
 
-//create
 const createJob = asyncHandler(async (req, res) => {
-
     const { name, description, salary, images, img, id_cat } = req.body;
 
     const jobData = {
@@ -17,10 +15,11 @@ const createJob = asyncHandler(async (req, res) => {
         id_cat: id_cat || null,
     };
 
-    const category = await Category.findOne({ id_cat }).exec();
+    const category = await Category.findOne({ id_cat });
     if (!category) {
         res.status(400).json({ message: "No se ha encontrado la categoría" });
     }
+
     const job = await new Job(jobData);
     await job.save();
 
@@ -28,8 +27,9 @@ const createJob = asyncHandler(async (req, res) => {
         res.status(400).json({ message: "No se ha creado el trabajo" });
     }
     await category.addJob(job._id); //añadir trabajo a la categoría
+
     return res.status(200).json({
-        job: await job.toProductResponse()
+        job: await job.toJobResponse()
     })
 });
 
@@ -43,7 +43,7 @@ const findOneJob = asyncHandler(async (req, res) => {
     }
 
     return res.status(200).json({
-        job: await job.toProductResponse()
+        job: await job.toJobResponse()
     })
 
 });
@@ -64,6 +64,24 @@ const findAllJobs = asyncHandler(async (req, res) => {
     });
 });
 
+const getJobsByCategory = asyncHandler(async (req, res) => {
+
+    const category = await Category.findOne(req.params);
+
+    if (!category) {
+        res.status(400).json({
+            message: "Categoría no encontrada"
+        });
+    } else {
+        return await res.status(200).json({
+            jobs: await Promise.all(category.jobs.map(async jobId => {
+                const jobObj = await Job.findById(jobId);
+                return await jobObj.toJobResponse();
+            }))
+        })
+    }
+});
+
 const updateJob = asyncHandler(async (req, res) => {
     const job = await Job.findOne(req.params)
 
@@ -73,21 +91,19 @@ const updateJob = asyncHandler(async (req, res) => {
         })
     }
 
-    const { name, salary, description, id_cat, img, images } = req.body;
+    const { name, salary, description, img, images } = req.body;
 
     job.name = name || job.name;
     job.salary = salary || job.salary;
     job.description = description || job.description;
-    job.id_cat = id_cat || job.id_cat;
     job.img = img || job.img;
     job.images = images || job.images;
 
-
     const updated_job = await job.save();
-
-    res.json({ updated_job })
+    return res.status(200).json({
+        message: "Trabajo actualizado"
+    });
 })
-
 
 const deleteOneJob = asyncHandler(async (req, res) => {
     const job = await Job.findOne(req.params);
@@ -97,18 +113,25 @@ const deleteOneJob = asyncHandler(async (req, res) => {
             message: "Este trabajo no existe"
         })
     }
-    await Job.findOneAndDelete(req.params);
-    res.json({
-        message: "Tramajo eliminado"
-    })
 
+    const id_cat = job.id_cat
+    const category = await Category.findOne({id_cat});
+
+    if (category) {
+        await category.removeJob(job._id) // especificado en category.model.js
+    }
+
+    await Job.deleteOne(req.params);
+    return res.status(200).json({
+        message: "Trabajo eliminado"
+    });
 })
-
 
 module.exports = {
     createJob,
     findOneJob,
     findAllJobs,
     updateJob,
+    getJobsByCategory,
     deleteOneJob
 }
