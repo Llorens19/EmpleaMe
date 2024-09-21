@@ -10,7 +10,7 @@ const createCategory = asyncHandler(async (req, res) => {
         id_cat: attributes.id_cat || null,
         category_name: attributes.category_name || null,
         image: attributes.image || null,
-        products: []
+        jobs: []
     };
 
     const category = await new Category(category_data); //creamos un nuevo objeto de tipo Category

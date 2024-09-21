@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
-import { OnInit } from '@angular/core';
+import { CarouselDetails, CarouselHome } from '../shared/models/carousel.model';
+import { CarouselComponent } from '../shared/components/carousel/carousel.component';
+import { ListCategoriesComponent } from './ui/list-categories/list-categories.component';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [ListCategoriesComponent, CarouselComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css'],
 })
-export default class HomeComponent implements OnInit {
+export default class HomeComponent {
   constructor() {
     console.log('HomeComponent constructor');
   }
 
-  ngOnInit() {
-    console.log('HomeComponent ngOnInit');
-  }
 
 }
