@@ -1,13 +1,11 @@
-<div class="col-md-4 col-sm-6 category" *ngIf="categories">
-    <div class="card mb-30"><a class="card-img-tiles" data-abc="true">
-            <div class="inner">
-                <div class="main-img"><img src="{{categories.image}}" alt="Category"></div>
-            </div>
-        </a>
-        <div class="card-body text-center">
-            <h4 class="card-title">{{categories.category_name}}</h4>
-            <!-- <a class="btn btn-outline-primary btn-sm" [routerLink]="['/shop/categories/', categories.slug]"
-                        data-abc="true">View Products</a> -->
+<div class="bg-white rounded-lg shadow-lg overflow-hidden w-80 mt-10 mb-10">
+    <a href="#">
+        <div class="relative h-48">
+            <img src="{{categories.image}}" alt="Prosegur" class="w-full h-full object-cover">
         </div>
+    </a>
+    <div class="p-6 text-center">
+        <h4 class="text-xl font-bold text-[#240046]">{{categories.category_name}}</h4>
+        <p class="text-gray-500">29 ofertas</p>
     </div>
 </div>
