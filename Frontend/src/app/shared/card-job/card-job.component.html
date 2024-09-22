@@ -1,0 +1,19 @@
+@if (jobs) {
+    <div class="container mt-100">
+        <div class="aliniar">
+            <div class="col-md-4 col-sm-6 category">
+                <div class="card mb-30">
+                    <a class="card-img-tiles" routerLink="/details/{{ jobs.slug }}" data-abc="true">
+                        <div class="inner">
+                            <div class="main-img"><img id="img-cat" src="img_jobs/{{ jobs.img }}" alt="{{ jobs.name }}"></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="card-body text-center">
+                    <h3 class="card-title">{{ jobs.name }}</h3>
+                    <p class="card-salary">{{ jobs.salary }} €</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}

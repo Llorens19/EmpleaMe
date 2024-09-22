@@ -1,0 +1,5 @@
+<div class="productoss">
+    @for (job of jobs; track job.slug) {
+        <app-card-job [jobs]="job"></app-card-job>
+    }
+</div>
