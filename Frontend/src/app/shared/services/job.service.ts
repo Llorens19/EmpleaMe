@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable, of } from 'rxjs';
 import { Job } from '../models/job.model';
 
-const URL = 'http://localhost:3000/products';
+const URL = 'http://localhost:3000/jobs';
 const URLcat = 'http://localhost:3000/categories';
 
 

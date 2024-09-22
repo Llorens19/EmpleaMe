@@ -12,7 +12,7 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export default class HomeComponent {
+export class HomeComponent {
   constructor() {
     console.log('HomeComponent constructor');
   }
