@@ -1,0 +1,5 @@
+<div class="categorias">
+    @for (category of categories; track category.slug) {
+        <app-card-category [categories]="category"></app-card-category>
+    }
+</div>
