@@ -1,130 +1,43 @@
-const Job = require('../models/job.model.js');
-const Category = require('../models/category.model.js');
-// const mongoose = require('mongoose');
+// CONTROLLERS: manejan las solicitudes HTTP, reciben las request y emiten la respuesta
+const jobService = require("../services/job.service.js");
+ // EXPRESS-ASYNC-HANDLER captura los errores generados en operaciones asíncronas y los pasa al midleware de express
+ // no es necesario utilizar los try ... catch
 const asyncHandler = require('express-async-handler');
 
 const createJob = asyncHandler(async (req, res) => {
-    const { name, description, salary, images, img, id_cat } = req.body;
+    const newJob = await jobService.createJob(req.body);
 
-    const jobData = {
-        name: name || null,
-        description: description || null,
-        salary: salary || null,
-        images: images,
-        img: img || null,
-        id_cat: id_cat || null,
-    };
-
-    const category = await Category.findOne({ id_cat });
-    if (!category) {
-        res.status(400).json({ message: "No se ha encontrado la categoría" });
-    }
-
-    const job = await new Job(jobData);
-    await job.save();
-
-    if (!job) { //si no se crea el trabajo
-        res.status(400).json({ message: "No se ha creado el trabajo" });
-    }
-    await category.addJob(job._id); //añadir trabajo a la categoría
-
-    return res.status(200).json({
-        job: await job.toJobResponse()
-    })
+    return res.status(201).json(newJob)
 });
 
 const findOneJob = asyncHandler(async (req, res) => {
-    const job = await Job.findOne(req.params);
+    const job = await jobService.findOneJob(req.params);
 
-    if (!job) {
-        return res.status(401).json({
-            message: "No se ha encontrado este trabajo"
-        })
-    }
-
-    return res.status(200).json({
-        job: await job.toJobResponse()
-    })
-
+    return res.status(200).json({job: job});
 });
 
 const findAllJobs = asyncHandler(async (req, res) => {
-    const jobs = await Job.find();
+    const jobs = await jobService.findAllJobs();
 
-    if (!jobs) {
-        return res.status(401).json({
-            message: "No se ha encontrado ningún trabajo"
-        })
-    }
-
-    return res.status(200).json({
-        jobs: await Promise.all(jobs.map(async jobs => {
-            return await jobs.toJobResponse()
-        }))
-    });
+    return res.status(200).json({jobs: jobs});
 });
 
 const getJobsByCategory = asyncHandler(async (req, res) => {
+    const jobs = await jobService.getJobsByCategory(req.params);
 
-    const category = await Category.findOne(req.params);
-
-    if (!category) {
-        res.status(400).json({
-            message: "Categoría no encontrada"
-        });
-    } else {
-        return await res.status(200).json({
-            jobs: await Promise.all(category.jobs.map(async jobId => {
-                const jobObj = await Job.findById(jobId);
-                return await jobObj.toJobResponse();
-            }))
-        })
-    }
+    return res.status(200).json({jobs: jobs});
 });
 
 const updateJob = asyncHandler(async (req, res) => {
-    const job = await Job.findOne(req.params)
+    const updatedJob = await jobService.updateJob(req.params, req.body);
 
-    if (!job) {
-        return res.json({
-            message: "No existe este trabajo"
-        })
-    }
-
-    const { name, salary, description, img, images } = req.body;
-
-    job.name = name || job.name;
-    job.salary = salary || job.salary;
-    job.description = description || job.description;
-    job.img = img || job.img;
-    job.images = images || job.images;
-
-    const updated_job = await job.save();
-    return res.status(200).json({
-        message: "Trabajo actualizado"
-    });
+    res.status(200).json(updatedJob);
 })
 
 const deleteOneJob = asyncHandler(async (req, res) => {
-    const job = await Job.findOne(req.params);
+    const result = await jobService.deleteOneJob(req.params);
 
-    if (!job) {
-        return res.status(401).json({
-            message: "Este trabajo no existe"
-        })
-    }
-
-    const id_cat = job.id_cat
-    const category = await Category.findOne({id_cat});
-
-    if (category) {
-        await category.removeJob(job._id) // especificado en category.model.js
-    }
-
-    await Job.deleteOne(req.params);
-    return res.status(200).json({
-        message: "Trabajo eliminado"
-    });
+    return res.status(200).json(result);
 })
 
 module.exports = {
