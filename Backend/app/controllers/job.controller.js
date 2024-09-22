@@ -58,7 +58,7 @@ const findAllJobs = asyncHandler(async (req, res) => {
     }
 
     return res.status(200).json({
-        job: await Promise.all(jobs.map(async jobs => {
+        jobs: await Promise.all(jobs.map(async jobs => {
             return await jobs.toJobResponse()
         }))
     });

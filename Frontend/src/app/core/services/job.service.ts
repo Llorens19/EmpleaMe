@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Job } from '../models/job.model';
 
 const URL = 'http://localhost:3000/jobs';
-const URLcat = 'http://localhost:3000/categories';
+const URLcat = 'http://localhost:3000/jobsByCategory';
 
 @Injectable({
   providedIn: 'root'
