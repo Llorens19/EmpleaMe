@@ -21,21 +21,6 @@ export class CategoryService {
         return this.http.get<Category[]>(URL_select)
     }
 
-    // get_category(id: String): Observable<Category> {
-    //   return this.http.get<Category>(`${URL}/${id}`);
-    // }
-
-    // create_category(category: Category): Observable<Category[]> {
-    //   return this.http.post<Category[]>(URL, category);
-    // }
-
-    // delete_category(id: String): Observable<Category[]> {
-    //   return this.http.delete<Category[]>(`${URL}/${id}`);
-    // }
-
-    // delete_all_categories(): Observable<Category[]> {
-    //   return this.http.delete<Category[]>(`${URL}`);
-    // }
 }
 
 export type { Category };
