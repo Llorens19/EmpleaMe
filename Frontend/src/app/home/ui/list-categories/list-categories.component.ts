@@ -39,6 +39,8 @@ export class ListCategoriesComponent implements OnInit {
     );
   }
 
+
+
   getRequestParams(offset: number, limit: number): any {
     let params: any = {};
 

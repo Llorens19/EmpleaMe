@@ -66,8 +66,9 @@ export class ListJobsComponent implements OnInit {
     if (this.slug_Category !== null) {
       this.jobService.getJobsByCategory(this.slug_Category).subscribe(
         (data: any) => {
-          this.jobs = data.job;
           console.log(data);
+          this.jobs = data.jobs;
+
         });
     }
   }

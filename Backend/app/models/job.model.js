@@ -49,11 +49,11 @@ JobSchema.methods.slugify = async function () {
     this.slug = slugify(this.name) + '-' + (Math.random() * Math.pow(36, 10) | 0).toString(36);
 };
 
-JobSchema.methods.toJobResponse = async function (user) {
+JobSchema.methods.toJobResponse = async function () {
     return {
         slug: this.slug,
         name: this.name,
-        salary: this.price,
+        salary: this.salary,
         description: this.description,
         id_cat: this.id_cat,
         img: this.img,

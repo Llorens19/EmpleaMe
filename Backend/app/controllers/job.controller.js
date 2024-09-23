@@ -115,7 +115,7 @@ const deleteOneJob = asyncHandler(async (req, res) => {
     }
 
     const id_cat = job.id_cat
-    const category = await Category.findOne({id_cat});
+    const category = await Category.findOne({ id_cat });
 
     if (category) {
         await category.removeJob(job._id) // especificado en category.model.js
