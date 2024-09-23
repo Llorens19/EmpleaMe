@@ -57,8 +57,8 @@ export class ListJobsComponent implements OnInit {
   getJobs(): void {
     this.jobService.get_jobs().subscribe(
       (data: any) => {
-        this.jobs = data.job;
-        console.log(data.job);
+        this.jobs = data.jobs;
+        console.log(data.jobs);
       });
   }
 
