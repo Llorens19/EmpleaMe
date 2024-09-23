@@ -1,6 +1,7 @@
 // SERVICES: toda la lógica de negocio
 const categoryRepo = require("../repositories/category.repo.js");
 
+//CREATE
 const createCategory = async (data) => {
     //montamos el objeto con los datos que vienen en el body
     const category_data = {
@@ -13,6 +14,7 @@ const createCategory = async (data) => {
     return await categoryRepo.createCategory(category_data);
 };
 
+// FIND ALL
 const findAllCategories = async () => {
     const categories = await categoryRepo.findAllCategories();
 
@@ -25,6 +27,7 @@ const findAllCategories = async () => {
         }));
 };
 
+// FIND ONE
 const findOneCategory = async (params) => {
     const category = await categoryRepo.findOneCategory(params);
 
@@ -35,6 +38,7 @@ const findOneCategory = async (params) => {
     return await category.toCategoryResponse();
 };
 
+// UPDATE
 const updateCategory = async (params, data) => {
     const updatedCategory = await categoryRepo.updateCategory(params, data);
 
@@ -45,6 +49,7 @@ const updateCategory = async (params, data) => {
     return await updatedCategory.toCategoryResponse();
 };
 
+// DELETE ONE
 const deleteOneCategory = async (params) => {
     const category = await categoryRepo.deleteOneCategory(params);
 

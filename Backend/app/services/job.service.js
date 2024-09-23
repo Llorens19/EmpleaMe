@@ -2,6 +2,7 @@
 const jobRepo = require('../repositories/job.repo.js');
 const categoryRepo = require('../repositories/category.repo.js');
 
+// CREATE
 const createJob = async (data) => {
     const job_data = {
         name: data.name || null,
@@ -29,6 +30,7 @@ const createJob = async (data) => {
     return await newJob.toJobResponse();
 };
 
+// FIND ONE
 const findOneJob = async (params) => {
     const job = await jobRepo.findOneJob(params);
 
@@ -39,6 +41,7 @@ const findOneJob = async (params) => {
     return await job.toJobResponse();
 };
 
+// FIND ALL
 const findAllJobs = async () => {
     const jobs = await jobRepo.findAllJobs();
 
@@ -51,6 +54,7 @@ const findAllJobs = async () => {
     }));
 };
 
+// GET JOBS BY CATEGORY
 const getJobsByCategory = async (params) => {
     const category = await categoryRepo.findOneCategory(params);
 
@@ -64,6 +68,7 @@ const getJobsByCategory = async (params) => {
     }))
 };
 
+// UPDATE
 const updateJob = async (params, data) => {
     const updatedJob = await jobRepo.updateJob(params, data);
 
@@ -74,6 +79,7 @@ const updateJob = async (params, data) => {
     return await updatedJob.toJobResponse();
 };
 
+// DELETE
 const deleteOneJob = async (params) => {
     const job = await jobRepo.findOneJob(params);
 
