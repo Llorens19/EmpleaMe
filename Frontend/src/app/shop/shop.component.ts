@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListJobsComponent } from '../shared/components/list-jobs/list-jobs.component';
+import { ListJobsComponent } from '../shared';
 
 @Component({
   selector: 'app-shop',

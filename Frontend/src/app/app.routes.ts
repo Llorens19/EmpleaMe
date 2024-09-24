@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { DetailsResolver } from './shared/services';
+import { DetailsResolver } from './core/services';
 
 export const routes: Routes = [
     {
@@ -27,8 +27,6 @@ export const routes: Routes = [
         path: 'details/:slug',
         loadComponent: () => import('./details/details.component').then(c => c.DetailsComponent),
         resolve: { job: DetailsResolver } // 
-    }
-
-
+    },
 
 ];
