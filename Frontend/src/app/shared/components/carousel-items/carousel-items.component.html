@@ -1,19 +1,15 @@
-<ngb-carousel *ngIf="page === 'categories'" style="background-color: #1e262d">
-    <ng-template *ngFor="let category of categories;" ngbSlide>
-        <div class="picsum-img-wrapper contenedor">
-            <img class="img_carousel" src="../../../{{category.image}}"
-                ug][routerLink]="['/shop/categories/', category.sl" alt="" />
-        </div>
-        <div class="carousel-caption display-4">
-            <h3>{{category.category_name}}</h3>
-        </div>
-    </ng-template>
-</ngb-carousel>
+@if (page === 'categories') {
+@for (let category of categories) {
+<div class="min-w-full h-96 flex items-center justify-center">
+    <img src="https://via.placeholder.com/1200x800" alt="Slide 1" class="w-full h-full object-cover">
+</div>
+}
+}
 
-<ngb-carousel *ngIf="page === 'details'" style="background-color: #1e262d">
-    <ng-template *ngFor="let item of products_details;" ngbSlide>
-        <div class="picsum-img-wrapper contenedor">
-            <img class="img_carousel" src="../../../{{item}}" alt="" />
-        </div>
-    </ng-template>
-</ngb-carousel>
+@if (page === 'details') {
+@for (let item of items) {
+<div class="min-w-full h-96 flex items-center justify-center">
+    <img src="https://via.placeholder.com/1200x800" alt="Slide 1" class="w-full h-full object-cover">
+</div>
+}
+}

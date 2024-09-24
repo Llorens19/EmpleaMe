@@ -10,41 +10,32 @@ import { CarouselItemsComponent } from '../carousel-items/carousel-items.compone
 @Component({
   selector: 'app-carousel',
   standalone: true,
-  imports: [CarouselItemsComponent],
+  imports: [CarouselItemsComponent, CarouselItemsComponent],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.css'
 })
 
-export class CarouselComponent implements OnInit {
+export class CarouselComponent {
+  currentSlide = 0;
+  totalSlides = 3;  // Número total de slides
 
-  items_carousel!: CarouselHome[];
-  items_details!: CarouselDetails[];
-  slug_details!: string | null;
-  page!: String;
-
-  constructor(private CarouselService: CarouselService, private jobService: JobService, private ActivatedRoute: ActivatedRoute,) { }
-
-  ngOnInit(): void {
-    this.slug_details = this.ActivatedRoute.snapshot.paramMap.get('slug');
-    this.carousel_categories();
-    this.carousel_shop_details();
+  // Cambiar a la siguiente slide
+  next() {
+    this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+    this.updateCarousel();
   }
 
-  carousel_categories(): void {
-    this.page = "categories";
-    this.CarouselService.getCarouselHome().subscribe(((data: any) => {
-      console.log(data);
-      this.items_carousel = data.categories;
-    }))
+  // Cambiar a la slide anterior
+  prev() {
+    this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+    this.updateCarousel();
   }
-  carousel_shop_details(): void {
-    if (this.slug_details) {
-      this.page = "details";
-      this.CarouselService.getCarouselDetails(this.slug_details).subscribe(((data: any) => {
-        // console.log(data);
-        this.items_details = data.products.images;
-        // console.log(this.items_details);
-      }))
+
+  // Actualizar la posición del carrusel
+  updateCarousel() {
+    const carousel = document.getElementById('carousel-items');
+    if (carousel) {
+      carousel.style.transform = `translateX(-${this.currentSlide * 100}%)`;
     }
   }
 }
