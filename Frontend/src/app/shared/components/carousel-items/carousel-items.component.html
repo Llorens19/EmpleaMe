@@ -1,15 +1,5 @@
-@if (page === 'categories') {
-@for (let category of categories) {
-<div class="min-w-full h-96 flex items-center justify-center">
-    <img src="https://via.placeholder.com/1200x800" alt="Slide 1" class="w-full h-full object-cover">
+<div id="carousel-items" class="flex transition-transform duration-500 ease-in-out">
+    <div *ngFor="let category of categories" class="min-w-full h-96 flex items-center justify-center">
+        <img src="{{category.image}}" alt="Slide 1" class="w-full h-full object-cover">
+    </div>
 </div>
-}
-}
-
-@if (page === 'details') {
-@for (let item of items) {
-<div class="min-w-full h-96 flex items-center justify-center">
-    <img src="https://via.placeholder.com/1200x800" alt="Slide 1" class="w-full h-full object-cover">
-</div>
-}
-}
