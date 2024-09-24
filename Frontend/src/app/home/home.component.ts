@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CarouselDetails, CarouselHome } from '../core/models/carousel.model';
-import { CarouselComponent,ListCategoriesComponent } from '../shared';
+import { SharedModule } from '../shared';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -8,7 +8,7 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ListCategoriesComponent, CarouselComponent],
+  imports: [SharedModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
