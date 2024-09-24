@@ -13,7 +13,7 @@ const createCategory = asyncHandler(async (req, res) => {
 
 // FIND ALL
 const findAllCategories = asyncHandler(async (req, res) => {
-    const categories =  await categoryService.findAllCategories();
+    const categories =  await categoryService.findAllCategories(req.query);
 
     return res.status(200).json({categories: categories});
 });

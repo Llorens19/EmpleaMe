@@ -46,6 +46,7 @@ mongoose.connect(dbConfig.url, {
 
 require('../routes/category.routes')(app);
 require('../routes/job.routes')(app);
+require('../routes/carousel.routes')(app);
 
 
 app.listen(PORT, () => {

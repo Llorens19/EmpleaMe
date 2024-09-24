@@ -4,12 +4,15 @@ const categoryModel = require("../models/category.model.js");
 // CREATE
 const createCategory = async (data) => {
     const category = await new categoryModel(data); //creamos un nuevo objeto de tipo categoryModel
+    
     return await category.save(); //guardamos el objeto en la base de datos
 };
 
 // FIND ALL
-const findAllCategories = async () => {
-    return await categoryModel.find();
+const findAllCategories = async (query) => {
+    const  {offset, limit} = query;
+    
+    return await categoryModel.find({}, {}, { skip: Number(offset), limit: Number(limit)});
 };
 
 // FIND ONE

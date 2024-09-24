@@ -37,13 +37,21 @@ category_schema.methods.slugify = function () {
     this.slug = slug(this.category_name) + '-' + (Math.random() * Math.pow(36, 6) | 0).toString(36);
 };
 
-category_schema.methods.toCategoryResponse = function () {
+category_schema.methods.toCategoryResponse = function() {
     return {
         slug: this.slug,
         id_cat: this.id_cat,
         category_name: this.category_name,
         image: this.image,
         jobs: this.jobs,
+    };
+};
+
+category_schema.methods.toCategoryCarouselResponse = function() {
+    return {
+        slug: this.slug,
+        image: this.image,
+        category_name: this.category_name
     };
 };
 

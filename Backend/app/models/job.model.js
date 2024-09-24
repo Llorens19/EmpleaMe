@@ -61,4 +61,10 @@ JobSchema.methods.toJobResponse = async function () {
     }
 }
 
+JobSchema.methods.toJobCarouselResponse = async function () {
+    return {
+        images: this.images
+    }
+}
+
 module.exports = mongoose.model('Job', JobSchema);
