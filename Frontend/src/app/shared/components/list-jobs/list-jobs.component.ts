@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Job } from '../../models';
-import { JobService } from '../../services';
+import { Job } from '../../../core/models';
+import { JobService, CategoryService } from '../../../core/services';
 import { ActivatedRoute } from '@angular/router'
-import { Category } from '../../models';
-import { CategoryService } from '../../services';
+import { Category } from '../../../core/models';
 import { CommonModule, Location } from '@angular/common';
 import { CardJobComponent } from '../card-job/card-job.component';
 

@@ -15,8 +15,8 @@ const createCategory = async (data) => {
 };
 
 // FIND ALL
-const findAllCategories = async () => {
-    const categories = await categoryRepo.findAllCategories();
+const findAllCategories = async (query) => {
+    const categories = await categoryRepo.findAllCategories(query);
 
     if (!categories) {
         return { message: "No se encontraron categorías" };

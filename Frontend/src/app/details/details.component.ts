@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
-import { Job } from '../shared/models';
-import { JobService } from '../shared/services';
+import { Job } from '../core/models';
+import { JobService } from '../core/services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgControlStatusGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
