@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Category } from '../models/category.model';
-import { CarouselDetails, CarouselHome } from '../models/carousel.model';
+import { Category } from '../../core/models/category.model';
+import { CarouselDetails, CarouselHome } from '../../core/models/carousel.model';
 
 const URL = 'http://localhost:3000/carousel';
 

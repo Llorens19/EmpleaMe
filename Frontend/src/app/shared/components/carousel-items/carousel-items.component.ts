@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { CarouselDetails, CarouselHome } from '../../models';
+import { CarouselDetails, CarouselHome } from '../../../core/models';
 import { CommonModule } from '@angular/common';
 import { NgbModule, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 

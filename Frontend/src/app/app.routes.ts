@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { DetailsResolver } from './shared/services';
+import { DetailsResolver } from './core/services';
 
 export const routes: Routes = [
     {

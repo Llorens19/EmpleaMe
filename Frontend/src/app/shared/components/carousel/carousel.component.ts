@@ -1,9 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CarouselDetails, CarouselHome } from '../../models';
-import { Category } from '../../models';
-import { CarouselService } from '../../services';
+import { CarouselDetails, CarouselHome } from '../../../core/models';
+import { Category } from '../../../core/models';
+import { CarouselService, JobService } from '../../../core/services';
 import { ActivatedRoute } from '@angular/router';
-import { JobService } from '../../services/job.service';
 import { CarouselItemsComponent } from '../carousel-items/carousel-items.component';
 
 

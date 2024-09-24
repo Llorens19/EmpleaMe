@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Category } from '../../../shared/models';
+import { Category } from '../../../core/models';
 import { RouterLink } from '@angular/router';
 
 @Component({

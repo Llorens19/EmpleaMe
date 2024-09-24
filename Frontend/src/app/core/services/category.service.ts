@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Category } from '../models/category.model';
+import { Category } from '../../core/models/category.model';
 const URL = 'http://127.0.0.1:3000/categories';
 const URL_select = 'http://127.0.0.1:3000/categories_select_filter';
 

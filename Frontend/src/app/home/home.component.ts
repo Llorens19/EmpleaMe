@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { CarouselDetails, CarouselHome } from '../shared/models/carousel.model';
-import { CarouselComponent } from '../shared/components/carousel/carousel.component';
-import { ListCategoriesComponent } from '../shared/components/list-categories/list-categories.component';
+import { CarouselDetails, CarouselHome } from '../core/models/carousel.model';
+import { CarouselComponent,ListCategoriesComponent } from '../shared';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @Component({
