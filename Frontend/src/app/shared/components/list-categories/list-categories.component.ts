@@ -2,15 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../../../shared/services';
 import { Category } from '../../../shared/models';
 import { CardCategoryComponent } from '../card-category/card-category.component';
-import { CommonModule } from '@angular/common';
-
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 
 @Component({
   selector: 'app-list-categories',
   standalone: true,
-  imports: [CardCategoryComponent, CommonModule],
+  imports: [CardCategoryComponent, InfiniteScrollDirective],
   templateUrl: './list-categories.component.html',
-  styleUrl: './list-categories.component.css'
+  styleUrls: ['./list-categories.component.css']
 })
 export class ListCategoriesComponent implements OnInit {
 
@@ -20,24 +19,24 @@ export class ListCategoriesComponent implements OnInit {
 
   constructor(private CategoryService: CategoryService) { }
 
-  //INICIA 
-
+  // Inicia 
   ngOnInit(): void {
     this.getCategories();
   }
 
-  // Cargamosa las categorias
+  // Cargamos las categorias
   getCategories() {
+    // Creamos objeto con offset y limit
     const params = this.getRequestParams(this.offset, this.limit);
 
     this.CategoryService.all_categories(params).subscribe(
       (data: any) => {
         this.categories = data.categories;
+        this.limit = this.limit + 4;
+        // console.log(this.categories, this.limit); 
       }
     );
   }
-
-
 
   getRequestParams(offset: number, limit: number): any {
     let params: any = {};
